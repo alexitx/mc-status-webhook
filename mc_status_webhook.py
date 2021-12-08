@@ -230,16 +230,18 @@ def cli():
         f'{address_title=}\n'
         f'{address_value=}'
     )
+    log.info('Running; To exit, press Ctrl-C')
 
+    log.debug('Checking initial status')
     online_last = check_server_status(host, port)
+    log.info(f"Initial server status: {'Online' if online_last else 'Offline'}")
     while True:
         time.sleep(args.update_time)
         online_now = check_server_status(host, port)
         if online_now == online_last:
             continue
         online_last = online_now
-        server_status = 'Online' if online_now else 'Offline'
-        log.info(f'Server status changed to: {server_status}')
+        log.info(f"Server status changed to: {'Online' if online_now else 'Offline'}")
         send_webhook_status(
             online_now,
             webhook_url,
