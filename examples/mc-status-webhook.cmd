@@ -13,4 +13,4 @@ set "MSW_STATUS_OFFLINE_VALUE=Offline"
 set "MSW_ADDRESS_TITLE=Address"
 set "MSW_ADDRESS_VALUE=example.com"
 
-python mc_status_webhook.py
+mc-status-webhook.exe

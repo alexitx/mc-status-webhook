@@ -12,4 +12,4 @@ export MSW_STATUS_OFFLINE_VALUE='Offline'
 export MSW_ADDRESS_TITLE='Address'
 export MSW_ADDRESS_VALUE='example.com'
 
-python3 mc_status_webhook.py
+mc-status-webhook
