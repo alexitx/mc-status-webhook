@@ -1,3 +1,11 @@
+__author__ = 'alexitx'
+__author_email__ = 'alexander@alexitx.com'
+__license__ = 'MIT'
+__title__ = 'mc-status-webhook'
+__url__ = 'https://github.com/alexitx/mc-status-webhook'
+__version__ = '0.1.0'
+
+
 import logging
 import logging.handlers
 import os
