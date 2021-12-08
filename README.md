@@ -5,16 +5,30 @@ Poll a server and send customizable webhook embed if the status changes.
 Requires Python 3.6+
 
 ## Table of contents
+- [Installation](#installation)
 - [Usage](#usage)
   - [CLI arguments](#cli-arguments)
   - [Environment variables](#environment-variables)
 - [License](#license)
 
+## Installation
+
+###### Use `python` on Windows instead of `python3`
+
+Update pip and dependencies
+```sh
+$ python3 -m pip install --upgrade pip
+$ python3 -m pip install --upgrade setuptools wheel
+```
+Install
+```sh
+$ python3 -m pip install git+https://github.com:alexitx/mc-status-webhook.git
+```
+
 ## Usage
 
 ```sh
-# Use 'python' on Windows and 'python3' on Linux
-python mc_status_webhook.py -u "<webhook url>" [options]
+$ python3 mc_status_webhook.py -u "<webhook url>" [options]
 ```
 or set the appropriate environment variables.
 
