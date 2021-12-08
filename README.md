@@ -35,6 +35,10 @@ or set the appropriate environment variables.
 See [CLI arguments](#cli-arguments) and [Environment variables](#environment-variables)
 for configuration.
 
+Example scripts are also provided in the 'examples' directory.
+Get [mc-status-webhook.cmd][windows-script] for Windows or [mc-status-webhook.sh][linux-script]
+for Linux and modify it to your needs.
+
 > **Note:** It is strongly recommended to run mc-status-webhook on the same machine or local network
 > as the Minecraft server to avoid false notifications due to connection issues and wasting
 > bandwidth. In this case use the loopback address 127.0.0.1 or the local address of the machine.
@@ -77,4 +81,6 @@ for configuration.
 
 MIT license. See [LICENSE][license] for more information.
 
+[windows-script]: https://github.com/alexitx/mc-status-webhook/raw/master/examples/mc-status-webhook.cmd
+[linux-script]: https://github.com/alexitx/mc-status-webhook/raw/master/examples/mc-status-webhook.sh
 [license]: https://github.com/alexitx/mc-status-webhook/blob/master/LICENSE
