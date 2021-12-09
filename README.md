@@ -53,7 +53,8 @@ for Linux and modify it to your needs.
 | -i, --initial-status   | bool  |           | No       | Send a webhook with the server status on application start |
 | -u, --webhook-url      | str   |           | Yes      | Discord webhook URL                                        |
 | -d, --debug            | bool  |           | No       | Log debug messages                                         |
-| --thumbnail-url        | str   |           | No       | Webhook thumbnail URL                                      |
+| --online-thumb-url     | str   |           | No       | Webhook thumbnail URL when the server is online            |
+| --offline-thumb-url    | str   |           | No       | Webhook thumbnail URL when the server is offline           |
 | --online-color         | str   | 30c030    | No       | Webhook color hex when the server is online                |
 | --offline-color        | str   | ff4040    | No       | Webhook color hex when the server is offline               |
 | --status-title         | str   | Status    | No       | Webhook status title                                       |
@@ -64,19 +65,20 @@ for Linux and modify it to your needs.
 
 ### Environment variables
 
-| Environment variable     | Equivalent argument    |
-|--------------------------|------------------------|
-| MSW_HOST                 | -H, --host             |
-| MSW_PORT                 | -p, --port             |
-| MSW_WEBHOOK_URL          | -u, --webhook-url      |
-| MSW_THUMBNAIL_URL        | --thumbnail-url        |
-| MSW_ONLINE_COLOR         | --online-color         |
-| MSW_OFFLINE_COLOR        | --offline-color        |
-| MSW_STATUS_TITLE         | --status-title         |
-| MSW_STATUS_ONLINE_VALUE  | --status-online-value  |
-| MSW_STATUS_OFFLINE_VALUE | --status-offline-value |
-| MSW_ADDRESS_TITLE        | --address-title        |
-| MSW_ADDRESS_VALUE        | --address-value        |
+| Environment variable     | Equivalent argument     |
+|--------------------------|-------------------------|
+| MSW_HOST                 | -H, --host              |
+| MSW_PORT                 | -p, --port              |
+| MSW_WEBHOOK_URL          | -u, --webhook-url       |
+| MSW_ONLINE_THUMB_URL     | --online-thumbnail-url  |
+| MSW_OFFLINE_THUMB_URL    | --offline-thumbnail-url |
+| MSW_ONLINE_COLOR         | --online-color          |
+| MSW_OFFLINE_COLOR        | --offline-color         |
+| MSW_STATUS_TITLE         | --status-title          |
+| MSW_STATUS_ONLINE_VALUE  | --status-online-value   |
+| MSW_STATUS_OFFLINE_VALUE | --status-offline-value  |
+| MSW_ADDRESS_TITLE        | --address-title         |
+| MSW_ADDRESS_VALUE        | --address-value         |
 
 ## License
 

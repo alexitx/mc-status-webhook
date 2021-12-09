@@ -52,7 +52,8 @@ def check_server_status(host, port):
 def send_webhook_status(
     server_is_online,
     webhook_url,
-    thumbnail_url,
+    online_thumb_url,
+    offline_thumb_url,
     online_color,
     offline_color,
     status_title,
@@ -65,12 +66,14 @@ def send_webhook_status(
     webhook = DiscordWebhook(webhook_url, timeout=5)
     if server_is_online:
         embed = DiscordEmbed(title=status_title, description=status_online_value, color=online_color)
+        if online_thumb_url is not None:
+            embed.set_thumbnail(url=online_thumb_url)
         if address_value is not None:
             embed.add_embed_field(name=address_title, value=address_value)
     else:
         embed = DiscordEmbed(title=status_title, description=status_offline_value, color=offline_color)
-    if thumbnail_url is not None:
-        embed.set_thumbnail(url=thumbnail_url)
+        if offline_thumb_url is not None:
+            embed.set_thumbnail(url=offline_thumb_url)
     embed.set_timestamp()
     webhook.add_embed(embed)
     try:
@@ -145,8 +148,13 @@ def cli():
     )
     webhook_group = parser.add_argument_group(title='Webhook arguments')
     webhook_group.add_argument(
-        '--thumbnail-url',
-        help='Webhook thumbnail URL',
+        '--online-thumb-url',
+        help='Webhook thumbnail URL when the server is online',
+        metavar='<url>'
+    )
+    webhook_group.add_argument(
+        '--offline-thumb-url',
+        help='Webhook thumbnail URL when the server is offline',
         metavar='<url>'
     )
     webhook_group.add_argument(
@@ -198,7 +206,8 @@ def cli():
     host = args_default(args.host, os.environ.get('MSW_HOST', '127.0.0.1'))
     port = args_default(args.port, os.environ.get('MSW_PORT', '25565'))
     webhook_url = args_default(args.webhook_url, os.environ.get('MSW_WEBHOOK_URL'))
-    thumbnail_url = args_default(args.thumbnail_url, os.environ.get('MSW_THUMBNAIL_URL'))
+    online_thumb_url = args_default(args.online_thumb_url, os.environ.get('MSW_ONLINE_THUMB_URL'))
+    offline_thumb_url = args_default(args.offline_thumb_url, os.environ.get('MSW_OFFLINE_THUMB_URL'))
     online_color = args_default(args.online_color, os.environ.get('MSW_ONLINE_COLOR', '30c030'))
     offline_color = args_default(args.offline_color, os.environ.get('MSW_OFFLINE_COLOR', 'ff4040'))
     status_title = args_default(args.status_title, os.environ.get('MSW_STATUS_TITLE', 'Status'))
@@ -233,7 +242,8 @@ def cli():
         f'{args.update_time=}\n'
         f'{webhook_url=}\n'
         f'{args.debug=}\n'
-        f'{thumbnail_url=}\n'
+        f'{online_thumb_url=}\n'
+        f'{offline_thumb_url=}\n'
         f'{online_color=}\n'
         f'{offline_color=}\n'
         f'{status_title=}\n'
@@ -251,7 +261,8 @@ def cli():
         send_webhook_status(
             online_last,
             webhook_url,
-            thumbnail_url,
+            online_thumb_url,
+            offline_thumb_url,
             online_color,
             offline_color,
             status_title,
@@ -270,7 +281,8 @@ def cli():
         send_webhook_status(
             online_now,
             webhook_url,
-            thumbnail_url,
+            online_thumb_url,
+            offline_thumb_url,
             online_color,
             offline_color,
             status_title,
