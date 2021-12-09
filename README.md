@@ -45,21 +45,22 @@ for Linux and modify it to your needs.
 
 ### CLI arguments
 
-| Argument               | Type  | Default   | Required | Description                                        |
-|------------------------|-------|-----------|----------|----------------------------------------------------|
-| -H, --host             | str   | 127.0.0.1 | No       | Server address                                     |
-| -p, --port             | int   | 25565     | No       | Server port                                        |
-| -t, --update-time      | float | 10.0      | No       | Time in seconds between checking the server status |
-| -u, --webhook-url      | str   |           | Yes      | Discord webhook URL                                |
-| -d, --debug            | bool  | False     | No       | Log debug messages                                 |
-| --thumbnail-url        | str   |           | No       | Webhook thumbnail URL                              |
-| --online-color         | str   | 30c030    | No       | Webhook color hex when the server is online        |
-| --offline-color        | str   | ff4040    | No       | Webhook color hex when the server is offline       |
-| --status-title         | str   | Status    | No       | Webhook status title                               |
-| --status-online-value  | str   | Online    | No       | Webhook status value when the server is online     |
-| --status-offline-value | str   | Offline   | No       | Webhook status value when the server is offline    |
-| --address-title        | str   | Address   | No       | Webhook address title                              |
-| --address-value        | str   |           | No       | Webhook address value when the server is online    |
+| Argument               | Type  | Default   | Required | Description                                                |
+|------------------------|-------|-----------|----------|----------------------------------------------------------- |
+| -H, --host             | str   | 127.0.0.1 | No       | Server address                                             |
+| -p, --port             | int   | 25565     | No       | Server port                                                |
+| -t, --update-time      | float | 10.0      | No       | Time in seconds between checking the server status         |
+| -i, --initial-status   | bool  | False     | No       | Send a webhook with the server status on application start |
+| -u, --webhook-url      | str   |           | Yes      | Discord webhook URL                                        |
+| -d, --debug            | bool  | False     | No       | Log debug messages                                         |
+| --thumbnail-url        | str   |           | No       | Webhook thumbnail URL                                      |
+| --online-color         | str   | 30c030    | No       | Webhook color hex when the server is online                |
+| --offline-color        | str   | ff4040    | No       | Webhook color hex when the server is offline               |
+| --status-title         | str   | Status    | No       | Webhook status title                                       |
+| --status-online-value  | str   | Online    | No       | Webhook status value when the server is online             |
+| --status-offline-value | str   | Offline   | No       | Webhook status value when the server is offline            |
+| --address-title        | str   | Address   | No       | Webhook address title                                      |
+| --address-value        | str   |           | No       | Webhook address value when the server is online            |
 
 ### Environment variables
 

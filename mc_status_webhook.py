@@ -120,6 +120,12 @@ def cli():
         metavar='<seconds>'
     )
     main_group.add_argument(
+        '-i',
+        '--initial-status',
+        action='store_true',
+        help='Send a webhook with the server status on application start'
+    )
+    main_group.add_argument(
         '-u',
         '--webhook-url',
         help='Discord webhook URL',
@@ -235,6 +241,19 @@ def cli():
     log.debug('Checking initial status')
     online_last = check_server_status(host, port)
     log.info(f"Initial server status: {'Online' if online_last else 'Offline'}")
+    if args.initial_status:
+        send_webhook_status(
+            online_last,
+            webhook_url,
+            thumbnail_url,
+            online_color,
+            offline_color,
+            status_title,
+            status_online_value,
+            status_offline_value,
+            address_title,
+            address_value
+        )
     while True:
         time.sleep(args.update_time)
         online_now = check_server_status(host, port)
