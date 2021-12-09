@@ -36,7 +36,7 @@ See [CLI arguments](#cli-arguments) and [Environment variables](#environment-var
 for configuration.
 
 Example scripts are also provided in the 'examples' directory.
-Get [mc-status-webhook.cmd][windows-script] for Windows or [mc-status-webhook.sh][linux-script]
+Get [msw-example.cmd][windows-script] for Windows or [msw-example.sh][linux-script]
 for Linux and modify it to your needs.
 
 > **Note:** It is strongly recommended to run mc-status-webhook on the same machine or local network
@@ -82,6 +82,6 @@ for Linux and modify it to your needs.
 
 MIT license. See [LICENSE][license] for more information.
 
-[windows-script]: https://github.com/alexitx/mc-status-webhook/raw/master/examples/mc-status-webhook.cmd
-[linux-script]: https://github.com/alexitx/mc-status-webhook/raw/master/examples/mc-status-webhook.sh
+[windows-script]: https://github.com/alexitx/mc-status-webhook/raw/master/examples/msw-example.cmd
+[linux-script]: https://github.com/alexitx/mc-status-webhook/raw/master/examples/msw-example.sh
 [license]: https://github.com/alexitx/mc-status-webhook/blob/master/LICENSE
