@@ -18,6 +18,19 @@ from discord_webhook import DiscordEmbed, DiscordWebhook
 from mcstatus import MinecraftServer
 
 
+DEFAULT_HOST = '127.0.0.1'
+DEFAULT_PORT = '25565'
+DEFAULT_UPDATE_TIME = '10.0'
+DEFAULT_ONLINE_THUMB_URL = 'https://i.imgur.com/SVu67mY.png'
+DEFAULT_OFFLINE_THUMB_URL = 'https://i.imgur.com/vlnKMLh.png'
+DEFAULT_ONLINE_COLOR = '30c030'
+DEFAULT_OFFLINE_COLOR = 'ff4040'
+DEFAULT_STATUS_TITLE = 'Status'
+DEFAULT_STATUS_ONLINE_VALUE = 'Online'
+DEFAULT_STATUS_OFFLINE_VALUE = 'Offline'
+DEFAULT_ADDRESS_TITLE = 'Address'
+
+
 log = logging.getLogger()
 
 
@@ -203,16 +216,28 @@ def cli():
     def args_default(arg, default):
         return arg if arg is not None else default
 
-    host = args_default(args.host, os.environ.get('MSW_HOST', '127.0.0.1'))
-    port = args_default(args.port, os.environ.get('MSW_PORT', '25565'))
+    host = args_default(args.host, os.environ.get('MSW_HOST', DEFAULT_HOST))
+    port = args_default(args.port, os.environ.get('MSW_PORT', DEFAULT_PORT))
     webhook_url = args_default(args.webhook_url, os.environ.get('MSW_WEBHOOK_URL'))
-    online_thumb_url = args_default(args.online_thumb_url, os.environ.get('MSW_ONLINE_THUMB_URL', 'https://i.imgur.com/SVu67mY.png'))
-    offline_thumb_url = args_default(args.offline_thumb_url, os.environ.get('MSW_OFFLINE_THUMB_URL', 'https://i.imgur.com/vlnKMLh.png'))
-    online_color = args_default(args.online_color, os.environ.get('MSW_ONLINE_COLOR', '30c030'))
-    offline_color = args_default(args.offline_color, os.environ.get('MSW_OFFLINE_COLOR', 'ff4040'))
-    status_title = args_default(args.status_title, os.environ.get('MSW_STATUS_TITLE', 'Status'))
-    status_online_value = args_default(args.status_online_value, os.environ.get('MSW_STATUS_ONLINE_VALUE', 'Online'))
-    status_offline_value = args_default(args.status_offline_value, os.environ.get('MSW_STATUS_OFFLINE_VALUE', 'Offline'))
+    online_thumb_url = args_default(
+        args.online_thumb_url,
+        os.environ.get('MSW_ONLINE_THUMB_URL', DEFAULT_ONLINE_THUMB_URL)
+    )
+    offline_thumb_url = args_default(
+        args.offline_thumb_url,
+        os.environ.get('MSW_OFFLINE_THUMB_URL', DEFAULT_OFFLINE_THUMB_URL)
+    )
+    online_color = args_default(args.online_color, os.environ.get('MSW_ONLINE_COLOR', DEFAULT_ONLINE_COLOR))
+    offline_color = args_default(args.offline_color, os.environ.get('MSW_OFFLINE_COLOR', DEFAULT_OFFLINE_COLOR))
+    status_title = args_default(args.status_title, os.environ.get('MSW_STATUS_TITLE', DEFAULT_STATUS_TITLE))
+    status_online_value = args_default(
+        args.status_online_value,
+        os.environ.get('MSW_STATUS_ONLINE_VALUE', DEFAULT_STATUS_ONLINE_VALUE)
+    )
+    status_offline_value = args_default(
+        args.status_offline_value,
+        os.environ.get('MSW_STATUS_OFFLINE_VALUE', DEFAULT_STATUS_OFFLINE_VALUE)
+    )
     address_title = args_default(args.address_title, os.environ.get('MSW_ADDRESS_TITLE', 'Address'))
     address_value = args_default(args.address_value, os.environ.get('MSW_ADDRESS_VALUE'))
 
