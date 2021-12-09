@@ -16,4 +16,4 @@ rem set "MSW_STATUS_OFFLINE_VALUE=Offline"
 rem set "MSW_ADDRESS_TITLE=Address"
 rem set "MSW_ADDRESS_VALUE=example.com"
 
-mc-status-webhook
+mc-status-webhook %*

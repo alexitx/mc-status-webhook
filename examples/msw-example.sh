@@ -14,4 +14,4 @@
 #export MSW_ADDRESS_TITLE='Address'
 #export MSW_ADDRESS_VALUE='example.com'
 
-mc-status-webhook
+mc-status-webhook "$@"
