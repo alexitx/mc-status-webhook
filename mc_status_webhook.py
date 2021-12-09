@@ -149,12 +149,12 @@ def cli():
     webhook_group = parser.add_argument_group(title='Webhook arguments')
     webhook_group.add_argument(
         '--online-thumb-url',
-        help='Webhook thumbnail URL when the server is online',
+        help="Webhook thumbnail URL when the server is online ('none' = disabled)",
         metavar='<url>'
     )
     webhook_group.add_argument(
         '--offline-thumb-url',
-        help='Webhook thumbnail URL when the server is offline',
+        help="Webhook thumbnail URL when the server is offline ('none' = disabled)",
         metavar='<url>'
     )
     webhook_group.add_argument(
@@ -206,8 +206,8 @@ def cli():
     host = args_default(args.host, os.environ.get('MSW_HOST', '127.0.0.1'))
     port = args_default(args.port, os.environ.get('MSW_PORT', '25565'))
     webhook_url = args_default(args.webhook_url, os.environ.get('MSW_WEBHOOK_URL'))
-    online_thumb_url = args_default(args.online_thumb_url, os.environ.get('MSW_ONLINE_THUMB_URL'))
-    offline_thumb_url = args_default(args.offline_thumb_url, os.environ.get('MSW_OFFLINE_THUMB_URL'))
+    online_thumb_url = args_default(args.online_thumb_url, os.environ.get('MSW_ONLINE_THUMB_URL', 'https://i.imgur.com/SVu67mY.png'))
+    offline_thumb_url = args_default(args.offline_thumb_url, os.environ.get('MSW_OFFLINE_THUMB_URL', 'https://i.imgur.com/vlnKMLh.png'))
     online_color = args_default(args.online_color, os.environ.get('MSW_ONLINE_COLOR', '30c030'))
     offline_color = args_default(args.offline_color, os.environ.get('MSW_OFFLINE_COLOR', 'ff4040'))
     status_title = args_default(args.status_title, os.environ.get('MSW_STATUS_TITLE', 'Status'))
@@ -228,6 +228,11 @@ def cli():
 
     if webhook_url is None:
         parser.error('Webhook URL must be specified')
+
+    if online_thumb_url.lower() == 'none':
+        online_thumb_url = None
+    if offline_thumb_url.lower() == 'none':
+        offline_thumb_url = None
 
     color_re = re.compile(r'^[a-f0-9]{6}$', re.IGNORECASE)
     if not color_re.match(online_color):
