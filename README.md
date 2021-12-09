@@ -50,9 +50,9 @@ for Linux and modify it to your needs.
 | -H, --host             | str   | 127.0.0.1 | No       | Server address                                             |
 | -p, --port             | int   | 25565     | No       | Server port                                                |
 | -t, --update-time      | float | 10.0      | No       | Time in seconds between checking the server status         |
-| -i, --initial-status   | bool  | False     | No       | Send a webhook with the server status on application start |
+| -i, --initial-status   | bool  |           | No       | Send a webhook with the server status on application start |
 | -u, --webhook-url      | str   |           | Yes      | Discord webhook URL                                        |
-| -d, --debug            | bool  | False     | No       | Log debug messages                                         |
+| -d, --debug            | bool  |           | No       | Log debug messages                                         |
 | --thumbnail-url        | str   |           | No       | Webhook thumbnail URL                                      |
 | --online-color         | str   | 30c030    | No       | Webhook color hex when the server is online                |
 | --offline-color        | str   | ff4040    | No       | Webhook color hex when the server is offline               |
