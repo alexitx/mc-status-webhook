@@ -97,6 +97,12 @@ def cli():
             return f'{", ".join(action.option_strings)} {args_string}'
 
     parser = ArgumentParser(formatter_class=HelpFormatter_)
+    parser.add_argument(
+        '-v',
+        '--version',
+        action='version',
+        version=f'{__title__} {__version__}'
+    )
     main_group = parser.add_argument_group(title='Main arguments')
     main_group.add_argument(
         '-H',
