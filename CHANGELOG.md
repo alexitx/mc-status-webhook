@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.0]
 ### Added
 - Add online and offline webhook thumbnail options
 - Add default webhook thumbnails with option to disable them
