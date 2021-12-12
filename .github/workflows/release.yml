@@ -79,7 +79,7 @@ jobs:
         id: build
         run: |
           python3 -m build --sdist --wheel --outdir dist/ .
-          echo "::set-output name=wheel::mc-status-webhook-${{ needs.prepare.outputs.version }}-py3-none-any.whl"
+          echo "::set-output name=wheel::mc_status_webhook-${{ needs.prepare.outputs.version }}-py3-none-any.whl"
 
       - name: Upload wheel asset
         uses: shogo82148/actions-upload-release-asset@v1
