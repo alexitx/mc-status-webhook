@@ -1,0 +1,95 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  PYTHON_VERSION: 3.9
+
+jobs:
+  prepare:
+    name: Prepare release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install base dependencies
+        run: |
+          python3 -m pip install -U pip
+          python3 -m pip install -U setuptools wheel
+
+      - name: Get version
+        id: version
+        run: |
+          tag_version="${GITHUB_REF#refs/tags/v}"
+          project_version="$(python3 setup.py --version)"
+          if [ "$tag_version" != "$project_version" ]; then
+            echo "Version mismatch"
+            echo "GitHub ref: $GITHUB_REF"
+            echo "Tag version: $tag_version"
+            echo "Project version: $project_version"
+            exit 1
+          fi
+          echo "::set-output name=version::$tag_version"
+
+      - name: Get changelog
+        id: changelog
+        uses: mindsers/changelog-reader-action@v2
+        with:
+          version: ${{ steps.version.outputs.version }}
+
+      - name: Create release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          body: ${{ steps.changelog.outputs.changes }}
+          allowUpdates: true
+          omitPrereleaseDuringUpdate: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  build_dist:
+    name: Build source and wheel distributions
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install base dependencies
+        run: |
+          python3 -m pip install -U pip
+          python3 -m pip install -U setuptools wheel
+          python3 -m pip install build
+
+      - name: Build distribution
+        id: build
+        run: |
+          python3 -m build --sdist --wheel --outdir dist/ .
+          echo "::set-output name=wheel::mc-status-webhook-${{ needs.prepare.outputs.version }}-py3-none-any.whl"
+
+      - name: Upload wheel asset
+        uses: shogo82148/actions-upload-release-asset@v1
+        with:
+          upload_url: ${{ needs.prepare.outputs.upload_url }}
+          asset_path: dist/${{ steps.build.outputs.wheel }}
+          asset_name: ${{ steps.build.outputs.wheel }}
+          asset_content_type: application/x-wheel+zip
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
