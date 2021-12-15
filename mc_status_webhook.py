@@ -20,7 +20,6 @@ from mcstatus import MinecraftServer
 
 DEFAULT_HOST = '127.0.0.1'
 DEFAULT_PORT = '25565'
-DEFAULT_UPDATE_TIME = '10.0'
 DEFAULT_ONLINE_THUMB_URL = 'https://i.imgur.com/SVu67mY.png'
 DEFAULT_OFFLINE_THUMB_URL = 'https://i.imgur.com/vlnKMLh.png'
 DEFAULT_ONLINE_COLOR = '30c030'
