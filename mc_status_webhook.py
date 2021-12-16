@@ -57,6 +57,14 @@ def check_server_status(host, port, full_status=False):
         return True
     except (socket.timeout, ConnectionError):
         log.debug('Server is offline or unreachable')
+    except OSError as e:
+        if str(e) == 'Server did not respond with any information!':
+            log.error(
+                'Server is reachable, but did not respond with any information. '
+                'Try getting the full status instead of pinging.'
+            )
+        else:
+            log.error(format_exc('Error checking status'))
     except Exception:
         log.error(format_exc('Error checking status'))
     return False
