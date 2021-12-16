@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.3.0]
 ### Added
 - Add an option to select between ping and status
 
