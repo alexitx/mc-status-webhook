@@ -22,7 +22,7 @@ $ python3 -m pip install --upgrade setuptools wheel
 ```
 Install
 ```sh
-$ python3 -m pip install git+https://github.com/alexitx/mc-status-webhook.git
+$ python3 -m pip install --upgrade mc-status-webhook
 ```
 
 ## Usage
