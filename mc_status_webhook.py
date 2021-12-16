@@ -44,11 +44,15 @@ def error(msg=None, exc=None):
     sys.exit(1)
 
 
-def check_server_status(host, port):
-    log.debug(f'Checking status for server {host}:{port}')
+def check_server_status(host, port, full_status=False):
     server = MinecraftServer(host, port)
     try:
-        latency = server.ping(1)
+        if full_status:
+            log.debug(f'Fetching status for server {host}:{port}')
+            latency = server.status(1).latency
+        else:
+            log.debug(f'Pinging server {host}:{port}')
+            latency = server.ping(1)
         log.debug(f'Received response from server, latency: {latency}ms')
         return True
     except (socket.timeout, ConnectionError):
@@ -145,6 +149,12 @@ def cli():
         '--initial-status',
         action='store_true',
         help='Send a webhook with the server status on application start'
+    )
+    main_group.add_argument(
+        '-s',
+        '--full-status',
+        action='store_true',
+        help='Request full status info instead of just pinging (for BungeeCord-based proxies)'
     )
     main_group.add_argument(
         '-u',
@@ -289,13 +299,13 @@ def cli():
     log.info('Running; To exit, press Ctrl-C')
 
     log.debug('Checking initial status')
-    online_last = check_server_status(host, port)
+    online_last = check_server_status(host, port, args.full_status)
     log.info(f"Initial server status: {'Online' if online_last else 'Offline'}")
     if args.initial_status:
         send_webhook_status(online_last, **webhook_params)
     while True:
         time.sleep(args.update_time)
-        online_now = check_server_status(host, port)
+        online_now = check_server_status(host, port, args.full_status)
         if online_now == online_last:
             continue
         online_last = online_now
