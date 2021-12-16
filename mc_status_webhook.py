@@ -64,10 +64,10 @@ def check_server_status(host, port):
 def send_webhook_status(
     server_is_online,
     webhook_url,
-    online_thumb_url,
-    offline_thumb_url,
     online_color,
     offline_color,
+    online_thumb_url,
+    offline_thumb_url,
     status_title,
     status_online_value,
     status_offline_value,
@@ -160,16 +160,6 @@ def cli():
     )
     webhook_group = parser.add_argument_group(title='Webhook arguments')
     webhook_group.add_argument(
-        '--online-thumb-url',
-        help="Webhook thumbnail URL when the server is online ('none' = disabled)",
-        metavar='<url>'
-    )
-    webhook_group.add_argument(
-        '--offline-thumb-url',
-        help="Webhook thumbnail URL when the server is offline ('none' = disabled)",
-        metavar='<url>'
-    )
-    webhook_group.add_argument(
         '--online-color',
         help="Webhook color hex when the server is online (default: '30c030')",
         metavar='<color>'
@@ -178,6 +168,16 @@ def cli():
         '--offline-color',
         help="Webhook color hex when the server is offline (default: 'ff4040')",
         metavar='<color>'
+    )
+    webhook_group.add_argument(
+        '--online-thumb-url',
+        help="Webhook thumbnail URL when the server is online ('none' = disabled)",
+        metavar='<url>'
+    )
+    webhook_group.add_argument(
+        '--offline-thumb-url',
+        help="Webhook thumbnail URL when the server is offline ('none' = disabled)",
+        metavar='<url>'
     )
     webhook_group.add_argument(
         '--status-title',
@@ -253,33 +253,38 @@ def cli():
     if webhook_url is None:
         parser.error('Webhook URL must be specified')
 
-    if online_thumb_url.lower() == 'none':
-        online_thumb_url = None
-    if offline_thumb_url.lower() == 'none':
-        offline_thumb_url = None
-
     color_re = re.compile(r'^[a-f0-9]{6}$', re.IGNORECASE)
     if not color_re.match(online_color):
         parser.error(f"Invalid online color hex value '{online_color}'")
     if not color_re.match(offline_color):
         parser.error(f"Invalid offline color hex value '{offline_color}'")
 
+    if online_thumb_url.lower() == 'none':
+        online_thumb_url = None
+    if offline_thumb_url.lower() == 'none':
+        offline_thumb_url = None
+
+    webhook_params = {
+        'webhook_url': webhook_url,
+        'online_color': online_color,
+        'offline_color': offline_color,
+        'online_thumb_url': online_thumb_url,
+        'offline_thumb_url': offline_thumb_url,
+        'status_title': status_title,
+        'status_online_value': status_online_value,
+        'status_offline_value': status_offline_value,
+        'address_title': address_title,
+        'address_value': address_value
+    }
+    webhook_params_fmt = '\n'.join(f'{k}={repr(v)}' for k, v in webhook_params.items())
+
     log.debug(
         'Parsed arguments:\n'
         f'{host=}\n'
         f'{port=}\n'
         f'{args.update_time=}\n'
-        f'{webhook_url=}\n'
         f'{args.debug=}\n'
-        f'{online_thumb_url=}\n'
-        f'{offline_thumb_url=}\n'
-        f'{online_color=}\n'
-        f'{offline_color=}\n'
-        f'{status_title=}\n'
-        f'{status_online_value=}\n'
-        f'{status_offline_value=}\n'
-        f'{address_title=}\n'
-        f'{address_value=}'
+        f'{webhook_params_fmt}'
     )
     log.info('Running; To exit, press Ctrl-C')
 
@@ -287,19 +292,7 @@ def cli():
     online_last = check_server_status(host, port)
     log.info(f"Initial server status: {'Online' if online_last else 'Offline'}")
     if args.initial_status:
-        send_webhook_status(
-            online_last,
-            webhook_url,
-            online_thumb_url,
-            offline_thumb_url,
-            online_color,
-            offline_color,
-            status_title,
-            status_online_value,
-            status_offline_value,
-            address_title,
-            address_value
-        )
+        send_webhook_status(online_last, **webhook_params)
     while True:
         time.sleep(args.update_time)
         online_now = check_server_status(host, port)
@@ -307,19 +300,7 @@ def cli():
             continue
         online_last = online_now
         log.info(f"Server status changed to: {'Online' if online_now else 'Offline'}")
-        send_webhook_status(
-            online_now,
-            webhook_url,
-            online_thumb_url,
-            offline_thumb_url,
-            online_color,
-            offline_color,
-            status_title,
-            status_online_value,
-            status_offline_value,
-            address_title,
-            address_value
-        )
+        send_webhook_status(online_now, **webhook_params)
 
 
 def main():

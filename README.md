@@ -53,10 +53,10 @@ for Linux and modify it to your needs.
 | -i, --initial-status   | bool  |                 | No       | Send a webhook with the server status on application start           |
 | -u, --webhook-url      | str   |                 | Yes      | Discord webhook URL                                                  |
 | -d, --debug            | bool  |                 | No       | Log debug messages                                                   |
-| --online-thumb-url     | str   | \<online icon>  | No       | Webhook thumbnail URL when the server is online ('none' = disabled)  |
-| --offline-thumb-url    | str   | \<offline icon> | No       | Webhook thumbnail URL when the server is offline ('none' = disabled) |
 | --online-color         | str   | 30c030          | No       | Webhook color hex when the server is online                          |
 | --offline-color        | str   | ff4040          | No       | Webhook color hex when the server is offline                         |
+| --online-thumb-url     | str   | \<online icon>  | No       | Webhook thumbnail URL when the server is online ('none' = disabled)  |
+| --offline-thumb-url    | str   | \<offline icon> | No       | Webhook thumbnail URL when the server is offline ('none' = disabled) |
 | --status-title         | str   | Status          | No       | Webhook status title                                                 |
 | --status-online-value  | str   | Online          | No       | Webhook status value when the server is online                       |
 | --status-offline-value | str   | Offline         | No       | Webhook status value when the server is offline                      |
@@ -70,10 +70,10 @@ for Linux and modify it to your needs.
 | MSW_HOST                 | -H, --host              |
 | MSW_PORT                 | -p, --port              |
 | MSW_WEBHOOK_URL          | -u, --webhook-url       |
-| MSW_ONLINE_THUMB_URL     | --online-thumbnail-url  |
-| MSW_OFFLINE_THUMB_URL    | --offline-thumbnail-url |
 | MSW_ONLINE_COLOR         | --online-color          |
 | MSW_OFFLINE_COLOR        | --offline-color         |
+| MSW_ONLINE_THUMB_URL     | --online-thumbnail-url  |
+| MSW_OFFLINE_THUMB_URL    | --offline-thumbnail-url |
 | MSW_STATUS_TITLE         | --status-title          |
 | MSW_STATUS_ONLINE_VALUE  | --status-online-value   |
 | MSW_STATUS_OFFLINE_VALUE | --status-offline-value  |
