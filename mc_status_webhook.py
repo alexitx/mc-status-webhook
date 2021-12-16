@@ -13,6 +13,7 @@ import re
 import sys
 import socket
 import time
+import traceback
 from argparse import ArgumentParser, HelpFormatter
 from discord_webhook import DiscordEmbed, DiscordWebhook
 from mcstatus import MinecraftServer
@@ -33,6 +34,16 @@ DEFAULT_ADDRESS_TITLE = 'Address'
 log = logging.getLogger()
 
 
+def format_exc(msg=None):
+    exc_info = sys.exc_info()
+    exc_type = exc_info[0].__name__
+    exc_value = str(exc_info[1])
+    prefix = f'{msg}: ' if msg else ''
+    if exc_value:
+        return f'{prefix}{exc_type}: {exc_value}'
+    return f'{prefix}{exc_info[0].__name__}\n{traceback.format_exc()}'
+
+
 def check_server_status(host, port, full_status=False):
     server = MinecraftServer(host, port)
     try:
@@ -46,11 +57,8 @@ def check_server_status(host, port, full_status=False):
         return True
     except (socket.timeout, ConnectionError):
         log.debug('Server is offline or unreachable')
-    except Exception as e:
-        if str(e):
-            log.error(f'Error checking status: {type(e).__name__}: {e}')
-        else:
-            log.error('Error checking status', exc_info=e)
+    except Exception:
+        log.error(format_exc('Error checking status'))
     return False
 
 
