@@ -298,6 +298,8 @@ def cli():
         f'{host=}\n'
         f'{port=}\n'
         f'{args.update_time=}\n'
+        f'{args.initial_status=}\n'
+        f'{args.full_status=}\n'
         f'{args.debug=}\n'
         f'{webhook_params_fmt}'
     )
