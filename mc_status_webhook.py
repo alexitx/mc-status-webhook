@@ -33,17 +33,6 @@ DEFAULT_ADDRESS_TITLE = 'Address'
 log = logging.getLogger()
 
 
-def error(msg=None, exc=None):
-    if msg is not None:
-        log.error(f'Error: {msg}')
-    elif exc is not None:
-        if str(exc):
-            log.error(f'{type(exc).__name__}: {exc}')
-        else:
-            log.error(exc_info=exc)
-    sys.exit(1)
-
-
 def check_server_status(host, port, full_status=False):
     server = MinecraftServer(host, port)
     try:
