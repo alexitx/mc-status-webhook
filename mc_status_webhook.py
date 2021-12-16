@@ -36,11 +36,9 @@ log = logging.getLogger()
 
 def format_exc(msg=None):
     exc_info = sys.exc_info()
-    exc_type = exc_info[0].__name__
-    exc_value = str(exc_info[1])
     prefix = f'{msg}: ' if msg else ''
-    if exc_value:
-        return f'{prefix}{exc_type}: {exc_value}'
+    if str(exc_info[1]):
+        return f'{prefix}{exc_info[0].__name__}: {exc_info[1]}'
     return f'{prefix}{exc_info[0].__name__}\n{traceback.format_exc()}'
 
 
