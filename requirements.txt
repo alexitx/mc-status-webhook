@@ -1,2 +1,2 @@
-discord-webhook~=0.14
-mcstatus~=6.5
+discord-webhook~=0.15
+mcstatus~=8.0
