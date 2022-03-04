@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0]
+### Changed
+- Bump minimum required Python version to 3.7
+- Update dependencies
+  - discord-webhook ~=0.14 -> ~=0.15
+  - mcstatus ~=6.5 -> ~=8.0
+
 ## [0.3.0]
 ### Added
 - Add an option to select between ping and status

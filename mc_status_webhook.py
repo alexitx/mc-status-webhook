@@ -3,7 +3,7 @@ __author_email__ = 'alexander@alexitx.com'
 __license__ = 'MIT'
 __title__ = 'mc-status-webhook'
 __url__ = 'https://github.com/alexitx/mc-status-webhook'
-__version__ = '0.3.0'
+__version__ = '0.4.0'
 
 
 import logging
