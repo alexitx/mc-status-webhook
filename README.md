@@ -2,7 +2,7 @@
 
 Poll a server and send customizable webhook embed if the status changes.
 
-Requires Python 3.6+
+Requires Python 3.7+
 
 ## Table of contents
 - [Installation](#installation)
